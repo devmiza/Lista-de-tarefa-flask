@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Lista de Tarefas</h1>
+        </header>
+        <main>
+            <section class="add-task">
+                <h2>Adicionar nova tarefa</h2>
+                <form action="/create" method="post">
+                    <input type="text" name="description" placeholder="Descrição da tarefa" required>
+                    <button type="submit" class="add">Criar tarefa</button>
+                </form>
+            </section>
+            <section class="task-list">
+                <h2>Lista de tarefas</h2>
+                <ul>
+                    {% for task in tasks %}
+                        <li>
+                            <form action="/update_or_delete/{{ task.id }}" method="POST" class="task-form">
+                                <input type="text" name="description" value="{{ task.description }}" required>
+                                <button type="submit" name="action" value="edit" class="edit">Editar</button>
+                                <button type="submit" name="action" value="delete" class="delete">Excluir</button>
+                            </form>
+                            <form action="/toggle_status/{{ task.id }}" method="POST" class="task-form">
+                                <input type="checkbox" name="completed" onchange="this.form.submit()" {% if task.completed %}checked{% endif %}>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
