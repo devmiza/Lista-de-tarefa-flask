@@ -6,6 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo List</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .status-pendente {
+            color: orange;
+        }
+        .status-concluido {
+            color: green;
+        }
+        .tabs {
+            display: flex;
+            cursor: pointer;
+        }
+        .tab {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-right: 5px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,10 +44,35 @@
                     <button type="submit" class="add">Criar tarefa</button>
                 </form>
             </section>
-            <section class="task-list">
-                <h2>Lista de tarefas</h2>
+            <div class="tabs">
+                <div class="tab" onclick="showTab('all')">Todas as Tarefas</div>
+                <div class="tab" onclick="showTab('pending')">Pendentes</div>
+                <div class="tab" onclick="showTab('completed')">Concluídas</div>
+            </div>
+            <section id="all" class="tab-content active">
+                <h2>Todas as Tarefas</h2>
                 <ul>
-                    {% for task in tasks %}
+                    {% for task in all_tasks %}
+                        <li>
+                            <span class="{{ 'status-concluido' if task.completed else 'status-pendente' }}">
+                                {{ 'Concluído' if task.completed else 'Pendente' }}
+                            </span>
+                            <form action="/update_or_delete/{{ task.id }}" method="POST" class="task-form">
+                                <input type="text" name="description" value="{{ task.description }}" required>
+                                <button type="submit" name="action" value="edit" class="edit">Editar</button>
+                                <button type="submit" name="action" value="delete" class="delete">Excluir</button>
+                            </form>
+                            <form action="/toggle_status/{{ task.id }}" method="POST" class="task-form">
+                                <button type="submit" class="complete">{{ 'Reativar' if task.completed else 'Marcar como Concluída' }}</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section id="pending" class="tab-content">
+                <h2>Tarefas Pendentes</h2>
+                <ul>
+                    {% for task in pending_tasks %}
                         <li>
                             <form action="/update_or_delete/{{ task.id }}" method="POST" class="task-form">
                                 <input type="text" name="description" value="{{ task.description }}" required>
@@ -38,8 +86,8 @@
                     {% endfor %}
                 </ul>
             </section>
-            <section class="completed-task-list">
-                <h2>Tarefas Realizadas</h2>
+            <section id="completed" class="tab-content">
+                <h2>Tarefas Concluídas</h2>
                 <ul>
                     {% for task in completed_tasks %}
                         <li>
@@ -53,6 +101,14 @@
             </section>
         </main>
     </div>
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(function(tabContent) {
+                tabContent.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
 </body>
 
 </html>

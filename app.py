@@ -14,9 +14,10 @@ class Tasks(db.Model):
 #cRud (Read)
 @app.route('/')
 def index():
-    tasks = Tasks.query.filter_by(completed=False).all()
+    all_tasks = Tasks.query.all()
+    pending_tasks = Tasks.query.filter_by(completed=False).all()
     completed_tasks = Tasks.query.filter_by(completed=True).all()
-    return render_template('index.html', tasks=tasks, completed_tasks=completed_tasks)
+    return render_template('index.html', all_tasks=all_tasks, pending_tasks=pending_tasks, completed_tasks=completed_tasks)
 
 #Crud (Create)
 @app.route('/create', methods=['POST'])
