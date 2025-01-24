@@ -27,12 +27,12 @@
                     {% for task in tasks %}
                         <li>
                             <form action="/update_or_delete/{{ task.id }}" method="POST" class="task-form">
-                                <input type="text" name="description" value="{{ task.description }}" class="texto_task" required>
+                                <input type="text" name="description" value="{{ task.description }}" required>
                                 <button type="submit" name="action" value="edit" class="edit">Editar</button>
                                 <button type="submit" name="action" value="delete" class="delete">Excluir</button>
                             </form>
                             <form action="/toggle_status/{{ task.id }}" method="POST" class="task-form">
-                                <input type="checkbox" name="completed" onchange="this.form.submit()" {% if task.completed %}checked{% endif %}>
+                                <button type="submit" class="complete">Marcar como Concluída</button>
                             </form>
                         </li>
                     {% endfor %}
@@ -43,13 +43,9 @@
                 <ul>
                     {% for task in completed_tasks %}
                         <li>
-                            <form action="/update_or_delete/{{ task.id }}" method="POST" class="task-form">
-                                <input type="text" name="description" value="{{ task.description }}" required>
-                                <button type="submit" name="action" value="edit" class="edit">Editar</button>
-                                <button type="submit" name="action" value="delete" class="delete">Excluir</button>
-                            </form>
                             <form action="/toggle_status/{{ task.id }}" method="POST" class="task-form">
-                                <input type="checkbox" name="completed" onchange="this.form.submit()" {% if task.completed %}checked{% endif %}>
+                                <span>{{ task.description }}</span>
+                                <button type="submit" class="reactivate">Reativar Tarefa</button>
                             </form>
                         </li>
                     {% endfor %}

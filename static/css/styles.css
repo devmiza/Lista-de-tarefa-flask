@@ -74,6 +74,14 @@ button.delete {
     background-color: #dc3545; /* Vermelho */
 }
 
+button.complete {
+    background-color: #e69500; /* Verde */
+}
+
+button.reactivate {
+    background-color: #28a745; /* Azul claro */
+}
+
 ul {
     list-style: none;
     padding: 0;
