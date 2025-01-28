@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Menu Lateral -->
+        <div class="sidebar" id="sidebar">
+            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+            <!-- Esse é o conteúdo do menu (vai ser vazio por enquanto) -->
+            <div class="sidebar-content">
+                <!-- Adicionar conteúdo futuramente, quando necessário -->
+            </div>
+        </div>
+
+        <div class="content-container">
+            <header>
+                <div class="app-name">
+                    <h1>Daily Tasks</h1>
+                </div>
+            </header>
+
+            <!-- AQUI FICA O CONTEÚDO PRINCIPAL -->
+            <main>
+                <!-- Seu conteúdo principal da página vai aqui -->
+            </main>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active'); // Alterna a visibilidade do menu lateral
+        }
+    </script>
+</body>
+
+
+</html>
