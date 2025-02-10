@@ -1,21 +1,5 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #2e619b;
-    color: #272727;
-}
-
 .main-container {
-    background-color: rgb(230, 230, 230);
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     width: 80%; /* Alterado para mais flexível */
@@ -52,20 +36,16 @@ h1 {
 }
 
 .input-task {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 20px;
 }
 
-.add-task, .task-list {
-    width: 100%;
+.inputForm {
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
 .add-task input {
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(230, 230, 230, 0);
     width: 100%;
     max-width: 800px;
     padding: 10px 20px;
@@ -83,7 +63,7 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .add-task button:hover {
@@ -120,11 +100,11 @@ h1 {
 }
 
 .tab-content-container {
+    
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    /* overflow-y: auto; */
-    height: 100%;
+    max-height: 580px;
 }
 
 .tab-content {
@@ -132,11 +112,9 @@ h1 {
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
-    background-color: #f9f9f9; /* Cor de fundo mais suave */
-    flex-shrink: 0;
-    min-height: 100%;
     overflow-y: auto;
-    max-height: calc(100vh - 160px); /* Ajuste para garantir que o conteúdo não ultrapasse a tela */
+    flex-shrink: 0;
+    max-height: 580px;
 }
 
 .tab-content.active {
