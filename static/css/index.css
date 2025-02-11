@@ -93,7 +93,7 @@ h1 {
 }
 
 .tab.active {
-    background-color: rgb(8, 23, 63);
+    background-color: rgba(8, 23, 63, 0.8);
     color: #fff;
     transform: scale(1.05); /* Destaca a aba ativa */
 }

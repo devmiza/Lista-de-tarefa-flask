@@ -59,11 +59,13 @@
                                 </form>
                                 <!-- Excluir -->
                                 <form action="/delete/{{ task.id }}" method="post">
-                                    <button type="submit" name="action" value="delete" class="btn-delete">Excluir</button>
+                                    <button type="submit" name="action" value="delete"
+                                        class="btn-delete">Excluir</button>
                                 </form>
                                 <!-- Marcar como concluido ou reativar -->
                                 <form action="/toggle_status/{{ task.id }}" method="POST" class="task-form">
-                                    <button type="submit" class="btn-complete">{{ 'Reativar' if task.completed else 'Concluir' }}</button>
+                                    <button type="submit" class="btn-complete">{{ 'Reativar' if task.completed else
+                                        'Concluir' }}</button>
                                 </form>
                             </td>
                         </tr>
@@ -116,6 +118,14 @@
         document.querySelectorAll('.tab-content').forEach(tabContent => {
             tabContent.style.display = tabContent.id === tabId ? 'block' : 'none';
         });
+
+        // Remove a classe ativa de todas as abas
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // Adiciona a classe ativa à aba clicada
+        document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
     }
 </script>
 
