@@ -14,7 +14,7 @@ body {
 }
 
 .sidebar {
-   background-color: rgba(21, 26, 45, 1);
+   background-color: rgb(8, 23, 63);
    width: 270px;
    position: fixed;
    margin: 16px;
