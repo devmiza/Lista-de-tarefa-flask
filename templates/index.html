@@ -32,25 +32,44 @@
         <div class="tab-content-container">
             <!-- Seção Todas as Tarefas -->
             <section id="all" class="tab-content active">
-                <h2>Todas as Tarefas</h2>
-                <ul>
-                    {% for task in all_tasks %}
-                    <li>
-                        <span class="{{ 'status-concluido' if task.completed else 'status-pendente' }}">
-                            {{ 'Concluído' if task.completed else 'Pendente' }}
-                        </span>
-                        <form action="/update_or_delete/{{ task.id }}" method="POST" class="task-form">
-                            <input type="text" name="description" value="{{ task.description }}" required>
-                            <button type="submit" name="action" value="edit" class="edit">Editar</button>
-                            <button type="submit" name="action" value="delete" class="delete">Excluir</button>
-                        </form>
-                        <form action="/toggle_status/{{ task.id }}" method="POST" class="task-form">
-                            <button type="submit" class="complete">{{ 'Reativar' if task.completed else 'Marcar como
-                                Concluída' }}</button>
-                        </form>
-                    </li>
-                    {% endfor %}
-                </ul>
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in all_tasks %}
+                        <tr>
+                            <!-- Descrição da task -->
+                            <td class="td-description">{{ task.description }}</td>
+                            <!-- Status da task -->
+                            <td class="td-status">
+                                <span class="{{ 'status-concluido' if task.completed else 'status-pendente' }}">
+                                    {{ 'Concluído' if task.completed else 'Pendente' }}
+                                </span>
+                            </td>
+                            <!-- Botões de ação -->
+                            <td class="td-actions">
+                                <!-- Editar -->
+                                <form action="/edit/{{ task.id }}" method="post">
+                                    <button type="submit" name="action" value="edit" class="btn-edit">Editar</button>
+                                </form>
+                                <!-- Excluir -->
+                                <form action="/delete/{{ task.id }}" method="post">
+                                    <button type="submit" name="action" value="delete" class="btn-delete">Excluir</button>
+                                </form>
+                                <!-- Marcar como concluido ou reativar -->
+                                <form action="/toggle_status/{{ task.id }}" method="POST" class="task-form">
+                                    <button type="submit" class="btn-complete">{{ 'Reativar' if task.completed else 'Concluir' }}</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </Table>
             </section>
 
             <!-- Seção Tarefas Pendentes -->
@@ -65,7 +84,7 @@
                             <button type="submit" name="action" value="delete" class="delete">Excluir</button>
                         </form>
                         <form action="/toggle_status/{{ task.id }}" method="POST" class="task-form">
-                            <button type="submit" class="complete">Marcar como Concluída</button>
+                            <button type="submit" class="btn-complete">Marcar como Concluída</button>
                         </form>
                     </li>
                     {% endfor %}
@@ -80,7 +99,7 @@
                     <li>
                         <form action="/toggle_status/{{ task.id }}" method="POST" class="task-form">
                             <span>{{ task.description }}</span>
-                            <button type="submit" class="reactivate">Reativar Tarefa</button>
+                            <button type="submit" class="btn-reactivate">Reativar Tarefa</button>
                         </form>
                     </li>
                     {% endfor %}

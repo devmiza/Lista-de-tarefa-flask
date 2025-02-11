@@ -35,39 +35,25 @@ def create_task():
     db.session.commit()
     return redirect('/')
 
-# #crUd (Update)
-# @app.route('/update/<int:task_id>', methods=['POST'])
-# def update_task(task_id):
-#     task = Tasks.query.get(task_id)
-
-#     if task:
-#         task.description = request.form['description']
-#         task.description = task.description.upper()
-#         db.session.commit()
-#     return redirect('/')
-
-# #cruD (Delete)
-# @app.route('/delete/<int:task_id>', methods=['POST'])
-# def delete_task(task_id):
-#     task = Tasks.query.get(task_id)
-
-#     if task:
-#         db.session.delete(task)
-#         db.session.commit()
-#     return redirect('/')
-
-# Atualizar ou Deletar
-@app.route('/update_or_delete/<int:task_id>', methods=['POST'])
-def update_or_delete_task(task_id):
+#crUd (Update)
+@app.route('/update/<int:task_id>', methods=['POST'])
+def update_task(task_id):
     task = Tasks.query.get(task_id)
+
     if task:
-        if request.form['action'] == 'edit':
-            task.description = request.form['description']
-            task.description = task.description.upper()
-            db.session.commit()
-        elif request.form['action'] == 'delete':
-            db.session.delete(task)
-            db.session.commit()
+        task.description = request.form['description']
+        task.description = task.description.upper()
+        db.session.commit()
+    return redirect('/')
+
+#cruD (Delete)
+@app.route('/delete/<int:task_id>', methods=['POST'])
+def delete_task(task_id):
+    task = Tasks.query.get(task_id)
+
+    if task:
+        db.session.delete(task)
+        db.session.commit()
     return redirect('/')
 
 # Atualizar Status
